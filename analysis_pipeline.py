@@ -1,4 +1,5 @@
 import sys
+import matplotlib.pyplot as plt
 
 inputs = sys.argv
 data_file = inputs[1]
@@ -44,13 +45,31 @@ lowest_density_county = data_dict['county_name'][data_dict['density'].index(lowe
 county_pop_avg = round(average(data_dict['population']))
 county_pop_std = round(standard_deviation(data_dict['population']),2)
 print('\nHere are some statistics about the counties in the data file: ', "\n")
-print('The average county population is: ', county_pop_avg, 'with a standard deviation of', county_pop_std,"\n" )
-print('The top 3 most populous counties are: ', "\n\n")
+print('The average county population is', county_pop_avg, 'with a standard deviation of', county_pop_std,"\n" )
+print('The top 3 most populous counties are: ', "\n")
 for i in range(3):
     print('\t', i+1, '. ', top_3_pop_counties[i], 'with a population of', top_3_pop[i], "\n")
 print('The top 3 largest counties by area are: ', "\n")
 for i in range(3):
     print('\t', i+1, '. ', top_3_area_counties[i], 'with an area of', top_3_area[i], "\n")
-print('\n')
-print('The highest population density is', top_density_county, 'with a density of', highest_density, 
-      'and the lowest is', lowest_density_county, 'with a density of', lowest_density, "\n")
+print('The highest population density is', top_density_county, 'with a density of', round(highest_density), 'people per square mile,', "\n"
+      'and the lowest is', lowest_density_county, 'with a density of', round(lowest_density), 'people per square mile.', "\n")
+
+# plot the data
+#
+# plot the population of each county
+fig, ax = plt.subplots(1,2, figsize=(13,7))
+ax[0].bar(data_dict['county_name'], data_dict['population'])
+ax[0].set_title('County Population')
+ax[0].set_ylabel('Population')
+ax[0].set_xlabel('County')
+
+# plot the area of each county
+ax[1].bar(data_dict['county_name'], data_dict['area'])
+ax[1].set_title('County Area')
+ax[1].set_ylabel('Area (sq miles)')
+ax[1].set_xlabel('County')
+
+
+plt.show()
+
