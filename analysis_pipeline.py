@@ -38,7 +38,7 @@ top_3_area_counties = [data_dict['county_name'][data_dict['area'].index(area)] f
 highest_density = max(data_dict['density'])
 lowest_density = min(data_dict['density'])
 top_density_county = data_dict['county_name'][data_dict['density'].index(highest_density)]
-lowest_density_county = data_dict['county_name'][data_dict['density'].index(lowest_density])
+lowest_density_county = data_dict['county_name'][data_dict['density'].index(lowest_density)]
 
 # print the results
 county_pop_avg = round(average(data_dict['population']))
